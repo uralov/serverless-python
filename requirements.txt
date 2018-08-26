@@ -6,3 +6,4 @@ Werkzeug
 whitenoise
 zappa-django-utils
 psycopg2-binary
+raven

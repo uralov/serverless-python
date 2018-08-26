@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import raven
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'zappa_django_utils',
+    'raven.contrib.django.raven_compat',
 
     'book.apps.BookConfig',
 ]
@@ -76,18 +79,18 @@ WSGI_APPLICATION = 'serverless_django.wsgi.application'
 SQLITE_BUCKET = os.environ.get('SQLITE_BUCKET', "serverless-django")
 IS_OFFLINE = os.environ.get('LAMBDA_TASK_ROOT') is None
 
+RAVEN_CONFIG = {
+    'dsn': 'https://9556440403a241b1ac6090ae09c576fe:97517594e41d4c41a22348d21994407d@sentry.io/1258358',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    # 'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}
+
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': ':memory:',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -98,6 +101,13 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': ':memory:',
+#     }
+# }
 
 # if IS_OFFLINE:
 #     DATABASES = {
@@ -153,3 +163,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# try:
+#     from local_settings import *
+# except ImportError:
+#     pass

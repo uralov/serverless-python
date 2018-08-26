@@ -1,5 +1,6 @@
 .*
 node_modules
+local_settings.py
 
 __pycache__/
 *.py[cod]
@@ -104,4 +105,3 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-

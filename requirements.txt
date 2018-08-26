@@ -1,0 +1,7 @@
+django
+djangorestframework
+flask
+s3transfer
+Werkzeug
+whitenoise
+zappa-django-utils

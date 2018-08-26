@@ -20,5 +20,5 @@ from book.views import MyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('django_view/', MyView.as_view()),
+    path('', MyView.as_view()),
 ]

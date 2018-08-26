@@ -24,7 +24,7 @@ plugins:
 
 custom:
   wsgi:
-    app: sls_flask.hello.app
+    app: serverless_django.wsgi.application
     packRequirements: false
   pythonRequirements:
     dockerizePip: non-linux
@@ -67,18 +67,17 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /
-          method: get
+#  hello:
+#    handler: handler.hello
+#    events:
+#      - http:
+#          path: /
+#          method: get
   app:
     handler: wsgi.handler
     events:
-    - http:
-        path: /flask_view
-        method: get
+      - http: ANY /
+      - http: 'ANY {proxy+}'
 
 #  hello-django:
 #    handler: wsgi.handler

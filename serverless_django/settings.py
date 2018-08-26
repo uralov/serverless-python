@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # 'django.contrib.staticfiles',
 
     'rest_framework',
+    'zappa_django_utils',
 
     'book.apps.BookConfig',
 ]
@@ -75,25 +76,44 @@ WSGI_APPLICATION = 'serverless_django.wsgi.application'
 SQLITE_BUCKET = os.environ.get('SQLITE_BUCKET', "serverless-django")
 IS_OFFLINE = os.environ.get('LAMBDA_TASK_ROOT') is None
 
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': ':memory:',
+#     }
+# }
 
-# I hate different configuration for local and cloud, but this is what we have now.
-if IS_OFFLINE:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-            'NAME': 'sqlite.db',
-            'BUCKET': SQLITE_BUCKET
-        }
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'slstest',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+# if IS_OFFLINE:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
+#             'NAME': 'sqlite.db',
+#             'BUCKET': SQLITE_BUCKET
+#         }
+#     }
 
 
 # Password validation

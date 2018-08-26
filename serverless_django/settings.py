@@ -88,16 +88,16 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'slstest',
-#         'USER': '',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'slstest',
+        'USER': 'slstest',
+        'PASSWORD': 'qwe123zxc!',
+        'HOST': 'slstest.c4w5vnw780xy.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 # if IS_OFFLINE:
 #     DATABASES = {

@@ -5,7 +5,7 @@ from flask import Flask, Response
 app = Flask(__name__)
 
 
-@app.route('/flask_view')
+@app.route('/')
 def hello_world():
     message = {
         'message': 'Execution started successfully!'

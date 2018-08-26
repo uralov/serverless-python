@@ -67,17 +67,18 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-#  hello:
-#    handler: handler.hello
-#    events:
-#      - http:
-#          path: /
-#          method: get
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /native
+          method: get
   app:
     handler: wsgi.handler
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+    - http:
+        path: /
+        method: get
 
 #  hello-django:
 #    handler: wsgi.handler

@@ -1,8 +1,8 @@
 import json
 
-from flask import Flask, Response
-
-app = Flask(__name__)
+from flask import Response, jsonify
+from app import app
+from models import Book
 
 
 @app.route('/')
@@ -10,8 +10,9 @@ def hello_world():
     message = {
         'message': 'Execution started successfully!'
     }
-    return Response(json.dumps({
+    book = Book.query.first()
+    return jsonify({
         'statusCode': 200,
         'headers': {'Content-Type': 'application/json'},
-        'body': message
-    }))
+        'body': {'id': book.id, 'name': book.name}
+    })

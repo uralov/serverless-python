@@ -1,0 +1,6 @@
+flask
+raven
+psycopg2-binary
+python-dotenv
+werkzeug
+Flask-SQLAlchemy

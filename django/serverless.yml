@@ -55,9 +55,8 @@ functions:
   app:
     handler: wsgi.handler
     events:
-      - http:
-        - http: ANY /
-        - http: ANY {proxy+}
+      - http: ANY /
+      - http: ANY {proxy+}
 
 #  hello-django:
 #    handler: wsgi.handler

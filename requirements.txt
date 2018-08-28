@@ -1,9 +1,0 @@
-django
-djangorestframework
-flask
-s3transfer
-Werkzeug
-whitenoise
-zappa-django-utils
-psycopg2-binary
-raven

@@ -1,16 +1,3 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
-
 service: sls-test-django # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
@@ -32,17 +19,15 @@ custom:
 provider:
   name: aws
   runtime: python3.6
-
-# you can overwrite defaults here
   stage: dev
   region: us-east-2
 
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+  # you can add statements to the Lambda function's IAM Role here
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "rds:*"
+      Resource: "arn:aws:rds:us-east-2:250349595860:subgrp:default"
 #    - Effect: "Allow"
 #      Action:
 #        - "s3:PutObject"
@@ -71,14 +56,14 @@ functions:
     handler: handler.hello
     events:
       - http:
-          path: /native
+          path: /
           method: get
-  app:
-    handler: wsgi.handler
+  django:
+    handler: wsgi.django
     events:
-    - http:
-        path: /
-        method: get
+      - http:
+          path: /django
+          method: get
 
 #  hello-django:
 #    handler: wsgi.handler

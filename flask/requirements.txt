@@ -1,0 +1,4 @@
+flask
+raven
+psycopg2-binary
+werkzeug

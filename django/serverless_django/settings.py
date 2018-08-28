@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import raven
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -22,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$asuo4x_ipp-i#&)yj^f31ugpd7^_lp6sl252a*shvid5q8!7v'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG', False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -33,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     # 'django.contrib.staticfiles',
 
     'rest_framework',
-    'zappa_django_utils',
     'raven.contrib.django.raven_compat',
 
     'book.apps.BookConfig',
@@ -80,7 +78,7 @@ SQLITE_BUCKET = os.environ.get('SQLITE_BUCKET', "serverless-django")
 IS_OFFLINE = os.environ.get('LAMBDA_TASK_ROOT') is None
 
 RAVEN_CONFIG = {
-    'dsn': 'https://9556440403a241b1ac6090ae09c576fe:97517594e41d4c41a22348d21994407d@sentry.io/1258358',
+    'dsn': os.getenv('RAVEN_DNS'),
     # If you are using git, you can also automatically configure the
     # release based on the git info.
     # 'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
@@ -94,36 +92,16 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'slstest',
-        'USER': 'slstest',
-        'PASSWORD': 'qwe123zxc!',
-        'HOST': 'slstest.c4w5vnw780xy.us-east-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'slstest'),
+        'USER': os.getenv('DB_USER_NAME'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'connect_timeout': 5,
+        }
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': ':memory:',
-#     }
-# }
-
-# if IS_OFFLINE:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'zappa_django_utils.db.backends.s3sqlite',
-#             'NAME': 'sqlite.db',
-#             'BUCKET': SQLITE_BUCKET
-#         }
-#     }
 
 
 # Password validation
@@ -163,9 +141,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# try:
-#     from local_settings import *
-# except ImportError:
-#     pass

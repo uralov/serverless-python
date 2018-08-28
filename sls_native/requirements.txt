@@ -3,3 +3,4 @@ python-dotenv
 raven
 werkzeug
 SQLAlchemy
+python-lambda-local

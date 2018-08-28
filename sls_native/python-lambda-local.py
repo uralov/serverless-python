@@ -1,0 +1,1 @@
+/home/listener/.pyenv/versions/sls-native/bin/python-lambda-local

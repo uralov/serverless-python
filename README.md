@@ -1,5 +1,5 @@
 # serverless-python
-Application performance comparison Django vs Flask vs Native lambda using [serverless framework](https://serverless.com/framework/) in AWS.
+Application performance comparison Django vs Flask vs Native lambda using [serverless framework](https://serverless.com/framework/) in [AWS Lambda](https://aws.amazon.com/lambda/).
 
 ## Results:
 ### Native lambda

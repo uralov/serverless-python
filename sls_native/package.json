@@ -1,10 +1,10 @@
 {
-  "name": "sls-python",
+  "name": "my-serverless-project",
   "description": "",
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
-    "serverless-offline": "^3.25.9",
+    "serverless-offline-python": "^3.21.2",
     "serverless-python-requirements": "^4.1.1",
     "serverless-wsgi": "^1.5.0"
   }

@@ -4,3 +4,4 @@ raven
 werkzeug
 SQLAlchemy
 python-lambda-local
+peewee

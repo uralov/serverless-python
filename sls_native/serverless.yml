@@ -69,7 +69,12 @@ functions:
     - http:
         path: /alchemy
         method: GET
-
+  hello_peewee:
+    handler: handler.hello_peewee
+    events:
+    - http:
+        path: /peewee
+        method: GET
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

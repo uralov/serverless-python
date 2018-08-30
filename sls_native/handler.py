@@ -7,7 +7,7 @@ from psycopg2.extras import DictCursor
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Book
+from models import Book, BookPeewee
 
 load_dotenv()
 
@@ -38,6 +38,16 @@ session = Session()
 
 def hello_alchemy(event, context):
     book = session.query(Book).first()
+    response = {
+        "statusCode": 200,
+        "body": json.dumps({'id': book.id, 'name': book.name})
+    }
+
+    return response
+
+
+def hello_peewee(event, context):
+    book = BookPeewee.get()
     response = {
         "statusCode": 200,
         "body": json.dumps({'id': book.id, 'name': book.name})

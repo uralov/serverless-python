@@ -24,8 +24,8 @@ Application performance comparison Django vs Flask vs Native lambda using [serve
 **After warm-up:** Duration: 11.33 - 70 ms	Billed Duration: 100 ms Memory Size: 1024 MB	Max Memory Used: 71 MB	
 
 
-| Framework  | Pack size  | Cold start  | After warm-up |
-|---|---|---|
-| Native lambda  |   |   |
-| Flask  |   |   |
-| Django  |   |   |
+| Framework | Pack size | Cold start | After warm-up |
+|-----------|-----------|------------|---------------|
+|           |           |            |               |
+|           |           |            |               |
+|           |           |            |               |
